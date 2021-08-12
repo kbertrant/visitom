@@ -1,0 +1,30 @@
+{
+  "name": "visitom",
+  "version": "1.0.0",
+  "description": "Logiciel de gestion de visiteurs sur un site physique à controle d'accès.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "visitom"
+  },
+  "keywords": [
+    "visitom"
+  ],
+  "author": "Aurel Bertrand KOUAM",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "sequelize": "^6.6.5"
+  }
+}
