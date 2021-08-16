@@ -2,6 +2,8 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
 
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
@@ -31,6 +33,24 @@ Visiteur.hasMany(Visite);
 
 Visite.belongsTo(User,{constraints: true, onDelete:'CASCADE'});
 User.hasMany(Visite);
+
+var options = {
+	host: 'localhost',
+	port: 3306,
+	user: 'session_test',
+	password: 'password',
+	database: 'session_test'
+};
+
+var sessionStore = new MySQLStore(options);
+
+app.use(session({
+	key: 'session_cookie_name',
+	secret: 'session_cookie_secret',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
 
 sequelize
   .sync()

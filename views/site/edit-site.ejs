@@ -1,0 +1,33 @@
+
+    <%- include('../includes/navigation.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../includes/head.ejs') %>
+        <div class="container-fluid">
+            <div class="container">
+
+                <div class="col-lg-10 col-md-10">
+                    <form action="/site/<% if (editing) { %>edit-site<% } else { %>add-site<% } %>" method="POST" >
+                      <h3><% if (editing) { %>Modifier Site<% } else { %>Ajouter Site<% } %></h3>
+                      <div class="col-lg-offset-2 col-lg-10 col-md-6 col-sm-12 centered">
+                      
+                      <div class="showback">
+                          <br>
+                          <input value="<% if (editing) { %><%= site.site_name %><% } %>" placeholder="Nom du site" id="site_name" type="text" class="form-control" name="site_name" required>
+                          <br>
+                          <input value="<% if (editing) { %><%= site.site_active %><% } %>" placeholder="Site active" id="site_active" type="text" class="form-control" name="site_active" required>
+                          <br>
+                          <% if (editing) { %>
+                            <input type="hidden" value="<%= site.id %>" name="siteId">
+                        <% } %>
+            
+                        <button class="btn btn-primary" type="submit"><% if (editing) { %>Modifier Site<% } else { %>Ajouter Site<% } %></button>
+                      </div>
+                  </div>
+                  </form>
+                  <br>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<%- include('../includes/end.ejs') %>
