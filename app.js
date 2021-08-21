@@ -1,5 +1,5 @@
 const path = require('path');
-
+var mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
 var session = require('express-session');
@@ -37,23 +37,44 @@ User.hasMany(Visite);
 var options = {
 	host: 'localhost',
 	port: 3306,
-	user: 'session_test',
-	password: 'password',
-	database: 'session_test'
+	user: 'root',
+	password: '',
+	database: 'visicom',
+  schema: {
+		tableName: 'sessions',
+		columnNames: {
+			session_id: 'session_id',
+			expires: 'expires',
+			data: 'data'
+		}
+	}
 };
-
+//var connection = mysql.createPool(options);
 var sessionStore = new MySQLStore(options);
 
 app.use(session({
 	key: 'session_cookie_name',
-	secret: 'session_cookie_secret',
+	secret: 'my secret',
 	store: sessionStore,
 	resave: false,
 	saveUninitialized: false
 }));
 
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user.id)
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
+});
+
 sequelize
   .sync()
+  //.sync({force:true})
   .then(result => {
     //console.log(result);
     app.listen(3000);

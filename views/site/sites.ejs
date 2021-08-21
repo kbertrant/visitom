@@ -8,21 +8,21 @@
 
 
  <% if (sites.length > 0) { %>
-    <div class="grid">
+    <div class="container">
         <% for (let site of sites) { %>
-            <article class="card product-item">
-                <header class="card__header">
+            <div class="card">
+                <div class="col-lg-4">
                     <h1 class="product__title">
                         <%= site.site_name %>
                     </h1>
-                </header>
+                </div>
                 
-                <div class="card__content">
+                <div class="col-lg-4">
                     <h2 class="product__price">
                         <%= site.site_active %>
                     </h2>
                 </div>
-                <div class="card__actions">
+                <div class="col-lg-4">
                     <a href="/site/edit-site/<%= site.id %>?edit=true" class="btn btn-primary">Modifier</a>
                     <form action="/site/delete-site" method="POST">
                         <input type="hidden" value="<%= site.id %>" name="siteId">
@@ -30,11 +30,11 @@
                     </form>
 
                 </div>
-            </article>
+            </div>
             <% } %>
     </div>
     <% } else { %>
-        <h1>No Products Found!</h1>
+        <h1>Pas de sites !</h1>
         <% } %>
 
     </div>

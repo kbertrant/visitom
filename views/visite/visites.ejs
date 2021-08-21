@@ -1,0 +1,40 @@
+<%- include('../includes/navigation.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../includes/head.ejs') %>
+        <div class="container-fluid">
+            <div class="container">
+
+ <% if (visites.length > 0) { %>
+    <div class="grid">
+        <% for (let visite of visites) { %>
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title">
+                        <%= visite.site_name %>
+                    </h1>
+                </header>           
+                <div class="card__content">
+                    <h2 class="product__price">
+                        <%= visite.site_active %>
+                    </h2>
+                </div>
+                <div class="card__actions">
+                    <a href="/visite/edit-visite/<%= visite.id %>?edit=true" class="btn btn-primary">Modifier</a>
+                    <form action="/visite/delete-visite" method="POST">
+                        <input type="hidden" value="<%= visite.id %>" name="visiteId">
+                        <button class="btn btn-danger" type="submit">Supprimer</button>
+                    </form>
+
+                </div>
+            </article>
+            <% } %>
+    </div>
+    <% } else { %>
+        <h1>Pas de Visites !</h1>
+        <% } %>
+
+    </div>
+</div>
+</div>
+</div>
+<%- include('../includes/end.ejs') %>
