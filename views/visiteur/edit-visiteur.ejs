@@ -1,0 +1,44 @@
+<%- include('../includes/navigation.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../includes/head.ejs') %>
+        <div class="container-fluid">
+            <div class="container">
+
+                
+                    <form action="/visiteur/<% if (editing) { %>edit-visiteur<% } else { %>add-visiteur<% } %>" method="POST" >
+                      <h3><% if (editing) { %>Modifier une visite<% } else { %>Ajouter une visite<% } %></h3>
+                      <div class="row">
+                      <div class="col-lg-offset-2 col-lg-8 col-md-8 col-sm-12 centered">
+                      <div class="form-group">
+                          <label>Numéro d'identification</label>
+                          <input value="<% if (editing) { %><%= visiteur.visit_doc_id %><% } %>" placeholder="numero identification" id="visit_doc_id" type="text" class="form-control" name="visit_doc_id" required>
+                      </div>
+                      <div class="form-group">
+                          <label>Date d'expiration</label>
+                          <input value="<% if (editing) { %><%= visiteur.doc_id_expiration %><% } %>" placeholder="Date d'expiration" id="doc_id_expiration" type="date" class="form-control" name="doc_id_expiration" required>
+                      </div> 
+                      <div class="form-group">
+                          <label>Noms du visiteur</label>
+                          <input value="<% if (editing) { %><%= visiteur.visit_fname %><% } %>" placeholder="Nom du visiteur" id="visit_fname" type="text" class="form-control" name="visit_fname" required>
+                        </div>
+                        <div class="form-group">
+                          <label>Prénoms du visiteur</label>
+                          <input value="<% if (editing) { %><%= visiteur.visit_lname %><% } %>" placeholder="Prénom du visiteur" id="visit_lname" type="text" class="form-control" name="visit_lname" required>
+                        </div>
+                          <% if (editing) { %>
+                            <input type="hidden" value="<%= visiteur.id %>" name="visiteurId">
+                          <% } %>
+                 
+                    <div class="form-group"> 
+                      <button class="btn btn-primary" type="submit"><% if (editing) { %>Modifier visiteur<% } else { %>Ajouter visite<% } %></button>  
+                    </div>
+                          
+                  </div>
+                  </form>
+                  <br>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<%- include('../includes/end.ejs') %>

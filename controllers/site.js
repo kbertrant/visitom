@@ -1,6 +1,7 @@
 const Site = require('../models/site');
 
 exports.getAddSite = (req,res,next) => {
+  //console.log(req.session.isLoggedIn); 
     res.render('site/edit-site',{
         pageTitle: 'Ajouter un site',
         path:'/site/add-site',
@@ -21,6 +22,7 @@ exports.postAddSite = (req, res, next) => {
       .then(result => {
         console.log(result);
         console.log('Site ajouté');
+        //req.session.data = true;
         res.redirect('/site/add-site');
       })
       .catch(err => {

@@ -1,0 +1,49 @@
+<%- include('../includes/navigation.ejs') %>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <%- include('../includes/head.ejs') %>
+        <div class="container-fluid">
+            <div class="container">
+            
+ <% if (visiteurs.length > 0) { %>
+    <h2>Toutes les visiteurs</h2>
+    <div class="grid">
+        <% for (let visiteur of visiteurs) { %>
+            <article class="card product-item">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <%= visiteur.visit_lname %>
+                    </div>
+                    <div class="col-lg-2">
+                        <%= visiteur.visit_fname %>
+                    </div>
+                    <div class="col-lg-2">
+                        <%= visiteur.visit_doc_id %>
+                    </div>
+                    <div class="col-lg-2">
+                        <%= visiteur.doc_id_expiration %>
+                    </div>
+                    <div class="col-lg-2">
+                        <%= visiteur.createdAt %>
+                    </div>
+                    <div class="col-lg-2">
+                        <a href="/visiteur/edit-visiteur/<%= visiteur.id %>?edit=true" class="btn btn-primary">Modifier</a>
+                        <form action="/visiteur/delete-visiteur" method="POST">
+                            <input type="hidden" value="<%= visiteur.id %>" name="visiteurId">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </form>
+    
+                    </div>
+                </div>           
+                
+            </article>
+            <% } %>
+    </div>
+    <% } else { %>
+        <h1>Pas de Visiteurs !</h1>
+        <% } %>
+
+    </div>
+</div>
+</div>
+</div>
+<%- include('../includes/end.ejs') %>

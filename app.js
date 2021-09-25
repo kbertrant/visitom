@@ -34,12 +34,12 @@ Visiteur.hasMany(Visite);
 Visite.belongsTo(User,{constraints: true, onDelete:'CASCADE'});
 User.hasMany(Visite);
 
-var options = {
-	host: 'localhost',
+var sessionStore = new MySQLStore({
+  host: 'localhost',
 	port: 3306,
 	user: 'root',
 	password: '',
-	database: 'visicom',
+	database: 'visitom',
   schema: {
 		tableName: 'sessions',
 		columnNames: {
@@ -48,12 +48,10 @@ var options = {
 			data: 'data'
 		}
 	}
-};
-//var connection = mysql.createPool(options);
-var sessionStore = new MySQLStore(options);
+}
+);
 
 app.use(session({
-	key: 'session_cookie_name',
 	secret: 'my secret',
 	store: sessionStore,
 	resave: false,

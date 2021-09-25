@@ -7,3 +7,10 @@ exports.getIndex = (req, res, next) => {
     path: '/'
   });
 };
+
+exports.getWelcome = (req, res, next) => {
+  res.render('main', {
+  pageTitle: 'welcome',
+  path: '/'
+});
+};
